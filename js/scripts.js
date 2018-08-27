@@ -10,13 +10,9 @@ function eventListeners() {
     document.querySelector('.listado-pendientes').addEventListener('click',accionesTareas);
     //Botones para las acciones de los proyectos
     document.querySelector('.lista-proyectos').addEventListener('click',accionesProyectos);
-
-}
-function NuevaTarea() {
-  //Boton para una nueva tarea
-  if(document.querySelector('nueva-tarea') !== null){
-    document.querySelector('.nueva-tarea').addEventListener('click',agregarTarea);
-  }
+    if(document.querySelector('nueva-tarea') !== null){
+      document.querySelector('.nueva-tarea').addEventListener('click',agregarTarea);
+    }
 
 }
 function nuevoProyecto(e) {
