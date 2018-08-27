@@ -10,7 +10,7 @@
                   $proyectos = obtenerProyectos();
                   if ($proyectos) {
                      foreach ($proyectos as $proyecto) { ?>
-                    <div class="acciones-proyectos">
+                    <div class="acciones-proyectos"  id="<?php echo $proyecto['id_proyecto'] ?>">
                             <li>
                               <a href="index.php?id_proyecto=<?php echo $proyecto['id_proyecto'] ?>" id="proyecto:<?php echo $proyecto['id_proyecto'] ?>">
                                     <?php echo $proyecto['nombre']; ?>

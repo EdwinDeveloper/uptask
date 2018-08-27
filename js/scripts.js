@@ -275,6 +275,52 @@ function eliminarTareaBD(tarea) {
 }
 function accionesProyectos(e) {
   if (e.target.classList.contains('fa-trash')) {
-      console.log('clic en eliminar proyecto');
+    swal({
+          title: 'Seguro?',
+          text: "Seguro que quieres elimiar el proyecto",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si , borrar!',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+              if (result.value) {
+                var ProyectoEliminar = e.target.parentElement.parentElement;
+                //Borrar de la Base de datos
+                ProyectoEliminarBD(ProyectoEliminar);
+                //Borrar del HTML
+                ProyectoEliminar.remove();
+                swal(
+                  'Eliminado!!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+              }
+        })
   }
+}
+function ProyectoEliminarBD(datosProyecto){
+      var idProyecto=datosProyecto.id;
+
+      var xhr = new XMLHttpRequest();
+      //Informacion
+      var datos = new FormData();
+      datos.append('id',idProyecto);
+      datos.append('action','eliminar');
+      //Abrir la conexion
+      xhr.open('POST','inc/modelos/modelo-proyecto.php',true);
+
+      //onload
+      xhr.onload = function() {
+          if (this.status=== 200) {
+               console.log(JSON.parse(xhr.responseText));
+               //Comprovar que haya tareas restantes
+               //var listaTareasRestantes = document.querySelectorAll('li.tarea');
+               //if (listaTareasRestantes.length === 0) {
+              //      document.querySelector('.listado-pendientes ul').innerHTML = "<p class='lista-vacia'>No hay tareas en este proyecto</p>";
+               //}
+          }
+      }
+      xhr.send(datos);
 }
